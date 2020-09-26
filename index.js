@@ -27,6 +27,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 // session & passport
+const mongoose = require("mongoose");
+mongoose
+  .connect(config.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log("MongoDB Connected..."))
+  .catch((err) => console.log(err));
 
 if (process.env.NODE_ENV === "production") {
   const MongoStore = require("connect-mongo")(session);
@@ -61,17 +71,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 }
-
-const mongoose = require("mongoose");
-mongoose
-  .connect(config.mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  })
-  .then(() => console.log("MongoDB Connected..."))
-  .catch((err) => console.log(err));
 
 // Serialize
 passport.serializeUser((user, done) => {
