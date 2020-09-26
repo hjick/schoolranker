@@ -834,7 +834,7 @@ passport.use(
       clientID: config.FACEBOOK_clientID,
       clientSecret: config.FACEBOOK_clientSecret,
       callbackURL: config.FACEBOOK_callbackURL,
-      profileFields: config.FACEBOOK_profileFields,
+      profileFields: ["email", "photos"],
     },
     function (accessToken, refreshToken, profile, done) {
       const {
