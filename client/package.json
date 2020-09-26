@@ -1,0 +1,56 @@
+{
+  "name": "schoolrank",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-brands-svg-icons": "^5.14.0",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "antd": "^4.6.2",
+    "axios": "^0.19.2",
+    "emotion": "^10.0.27",
+    "formik": "^2.1.5",
+    "http-proxy-middleware": "^1.0.5",
+    "react": "^16.13.1",
+    "react-compound-timer": "^1.2.0",
+    "react-confirm-alert": "^2.6.2",
+    "react-dom": "^16.13.1",
+    "react-ga": "^3.1.2",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "react-spinners": "^0.9.0",
+    "redux": "^4.0.5",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.1.1",
+    "styled-reset": "^4.2.1",
+    "yup": "^0.29.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "homepage": "./"
+}
