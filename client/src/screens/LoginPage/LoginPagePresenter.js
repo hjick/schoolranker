@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import kakao from "../../img/kakao.png";
 import naver from "../../img/naver.png";
-
 import PacmanLoader from "react-spinners/PacmanLoader";
+import MyHelmet from "components/MyHelmet";
 
 const Wrapper = styled.div`
   display: flex;
@@ -190,79 +190,82 @@ const LoginPage = ({
   showSidebar,
 }) => {
   return (
-    <Wrapper showSidebar={showSidebar}>
-      <Container>
-        <Logo>School RanKer</Logo>
-        <Subtitle>이메일로 로그인</Subtitle>
-        <LoginForm onSubmit={handleSubmit}>
-          <Input
-            type="email"
-            placeholder="이메일 주소"
-            value={email}
-            onChange={handleEmail}
-            required
-          ></Input>
-          <Input
-            type="password"
-            placeholder="비밀번호"
-            value={password}
-            onChange={handlePassword}
-            required
-          ></Input>
+    <>
+      <MyHelmet title="로그인 | School Ranker" />
+      <Wrapper showSidebar={showSidebar}>
+        <Container>
+          <Logo>School RanKer</Logo>
+          <Subtitle>이메일로 로그인</Subtitle>
+          <LoginForm onSubmit={handleSubmit}>
+            <Input
+              type="email"
+              placeholder="이메일 주소"
+              value={email}
+              onChange={handleEmail}
+              required
+            ></Input>
+            <Input
+              type="password"
+              placeholder="비밀번호"
+              value={password}
+              onChange={handlePassword}
+              required
+            ></Input>
 
-          <SpaceBetween>
-            <AutoLoginContainer>
-              <input type="checkbox" id="autoLogin" />
-              <label htmlFor="autoLogin">로그인 기억하기</label>
-            </AutoLoginContainer>
-            <ForgotInfo>
-              {/* <Link to="/loginpage/id">ID 찾기</Link> */}
-              <Link to="/forgotpassword">비밀번호 찾기</Link>
-            </ForgotInfo>
-          </SpaceBetween>
+            <SpaceBetween>
+              <AutoLoginContainer>
+                <input type="checkbox" id="autoLogin" />
+                <label htmlFor="autoLogin">로그인 기억하기</label>
+              </AutoLoginContainer>
+              <ForgotInfo>
+                {/* <Link to="/loginpage/id">ID 찾기</Link> */}
+                <Link to="/forgotpassword">비밀번호 찾기</Link>
+              </ForgotInfo>
+            </SpaceBetween>
 
-          {isLogging ? (
-            <SpinnerBox>
-              <PacmanLoader size={20} color={"#F7F700"} loading={isLogging} />
-            </SpinnerBox>
-          ) : (
-            <LoginBtn
-              type="submit"
-              valid={email && password}
-              disabled={!(email && password)}
-            >
-              로그인
-            </LoginBtn>
-          )}
-        </LoginForm>
-        <LineContainer>
-          <hr /> <span> 또는 </span> <hr />
-        </LineContainer>
-        <Subtitle>SNS로 로그인</Subtitle>
-        <SNSContainer>
-          {/* <button onClick={loginByFacebook}>페이스북으로 로그인</button> */}
-          <FacebookLogin href="/api/users/authfacebook">
-            <Icon icon={["fab", "facebook-square"]} />
-            페이스북으로 로그인
-          </FacebookLogin>
+            {isLogging ? (
+              <SpinnerBox>
+                <PacmanLoader size={20} color={"#F7F700"} loading={isLogging} />
+              </SpinnerBox>
+            ) : (
+              <LoginBtn
+                type="submit"
+                valid={email && password}
+                disabled={!(email && password)}
+              >
+                로그인
+              </LoginBtn>
+            )}
+          </LoginForm>
+          <LineContainer>
+            <hr /> <span> 또는 </span> <hr />
+          </LineContainer>
+          <Subtitle>SNS로 로그인</Subtitle>
+          <SNSContainer>
+            {/* <button onClick={loginByFacebook}>페이스북으로 로그인</button> */}
+            <FacebookLogin href="/api/users/authfacebook">
+              <Icon icon={["fab", "facebook-square"]} />
+              페이스북으로 로그인
+            </FacebookLogin>
 
-          <KakaoLogin href="/api/users/authkakao">
-            <img src={kakao} width="20px" height="20px" alt="kakaoLogin" />
-            카카오로 로그인
-          </KakaoLogin>
+            <KakaoLogin href="/api/users/authkakao">
+              <img src={kakao} width="20px" height="20px" alt="kakaoLogin" />
+              카카오로 로그인
+            </KakaoLogin>
 
-          <NaverLogin href="/api/users/authnaver">
-            <img src={naver} width="42px" height="42px" alt="naverLogin" />
-            네이버로 로그인
-          </NaverLogin>
-        </SNSContainer>
+            <NaverLogin href="/api/users/authnaver">
+              <img src={naver} width="42px" height="42px" alt="naverLogin" />
+              네이버로 로그인
+            </NaverLogin>
+          </SNSContainer>
 
-        <SignUp>
-          <span>아직도 등록을 안했다고?</span>
-          <Link to="/register">회원가입</Link>
-        </SignUp>
-      </Container>
-    </Wrapper>
+          <SignUp>
+            <span>아직도 등록을 안했다고?</span>
+            <Link to="/register">회원가입</Link>
+          </SignUp>
+        </Container>
+      </Wrapper>
+    </>
   );
 };
 

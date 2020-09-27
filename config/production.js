@@ -9,7 +9,6 @@ module.exports = {
   FACEBOOK_clientID: process.env.FACEBOOK_clientID,
   FACEBOOK_clientSecret: process.env.FACEBOOK_clientSecret,
   FACEBOOK_callbackURL: process.env.FACEBOOK_callbackURL,
-  FACEBOOK_profileFields: process.env.FACEBOOK_profileFields,
 
   KAKAO_clientID: process.env.KAKAO_clientID,
   KAKAO_clientSecret: process.env.KAKAO_clientSecret,

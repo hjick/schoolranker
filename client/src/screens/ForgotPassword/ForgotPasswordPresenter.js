@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PacmanLoader from "react-spinners/PacmanLoader";
+import MyHelmet from "components/MyHelmet";
 
 const Wrapper = styled.div`
   display: flex;
@@ -181,134 +182,141 @@ const ForgotPasswordPresenter = ({
   handleSubmit,
 }) => {
   return (
-    <Wrapper>
-      <Container>
-        <Logo>School RanKer</Logo>
-        <h2 style={{ fontWeight: "400", textAlign: "center" }}>
-          비밀번호 찾기
-        </h2>
-        <RegisterForm onSubmit={handleSubmit}>
-          <Label htmlFor="name">이름</Label>
-          <NameInput
-            id="name"
-            type="text"
-            placeholder="ex) 이현직"
-            value={name}
-            onChange={nameHandler}
-            required
-            isValid={name.length < 8}
-          ></NameInput>
-          <div>
-            <Label htmlFor="email">이메일</Label>
-            <EmailInput
-              id="email"
-              type="email"
-              placeholder="ex) schoolranker0@gmail.com"
-              value={email}
-              onChange={emailHandler}
+    <>
+      <MyHelmet title="비밀번호찾기 | School Ranker" />
+      <Wrapper>
+        <Container>
+          <Logo>School RanKer</Logo>
+          <h2 style={{ fontWeight: "400", textAlign: "center" }}>
+            비밀번호 찾기
+          </h2>
+          <RegisterForm onSubmit={handleSubmit}>
+            <Label htmlFor="name">이름</Label>
+            <NameInput
+              id="name"
+              type="text"
+              placeholder="ex) 이현직"
+              value={name}
+              onChange={nameHandler}
               required
-              readOnly={isSendEmail}
-            ></EmailInput>
+              isValid={name.length < 8}
+            ></NameInput>
+            <div>
+              <Label htmlFor="email">이메일</Label>
+              <EmailInput
+                id="email"
+                type="email"
+                placeholder="ex) schoolranker0@gmail.com"
+                value={email}
+                onChange={emailHandler}
+                required
+                readOnly={isSendEmail}
+              ></EmailInput>
 
-            {isSending ? ( /// 이메일 요청 보내는중
-              <SpinnerBox>
-                <PacmanLoader size={17} color={"#F7F700"} loading={isSending} />
-              </SpinnerBox>
-            ) : (
-              <SendEmailBtn
-                type="button"
-                onClick={sendEmailHandler}
-                disabled={!email || isSendEmail}
-              >
-                인증
-              </SendEmailBtn>
-            )}
-          </div>
-
-          {isSendEmail && ( /// 이메일 요청 완료 , 인증번호 입력창
-            <div style={{ margin: "-1rem 0 1.5rem" }}>
-              <AuthCodeInput
-                type="text"
-                placeholder="인증번호 6자리를 입력해주세요 !"
-                value={authCodeValue}
-                onChange={authCodeValueHandler}
-                readOnly={isCodeMatch}
-                maxLength="6"
-              ></AuthCodeInput>
-
-              {isAuthing ? (
+              {isSending ? ( /// 이메일 요청 보내는중
                 <SpinnerBox>
                   <PacmanLoader
-                    size={16}
+                    size={17}
                     color={"#F7F700"}
-                    loading={isAuthing}
+                    loading={isSending}
                   />
                 </SpinnerBox>
               ) : (
-                <AuthCodeBtn
-                  onClick={compareAuthCode}
+                <SendEmailBtn
                   type="button"
-                  valid={authCodeValue}
-                  disabled={!authCodeValue || isCodeMatch}
+                  onClick={sendEmailHandler}
+                  disabled={!email || isSendEmail}
                 >
-                  확인
-                </AuthCodeBtn>
+                  인증
+                </SendEmailBtn>
               )}
             </div>
-          )}
-          {isCodeMatch && (
-            <>
-              <Label htmlFor="newPassword">새 비밀번호</Label>
-              <Input
-                id="newPassword"
-                type="password"
-                placeholder="어렵게 8자리 이상"
-                value={newPassword}
-                onChange={newPasswordHandler}
-                required
-              ></Input>
-              {!(newPassword === "") &&
-                newPassword.length < 8 && ( // 비밀번호 Validation 체크
-                  <InvalidMsg>비밀번호는 8자리 이상이어야 해요 !</InvalidMsg>
-                )}
-              <Label htmlFor="newPassword2">새 비밀번호 확인</Label>
-              <Password2Input
-                id="newPassword2"
-                type="password"
-                placeholder="비밀번호 확인"
-                value={newPassword2}
-                onChange={newPassword2Handler}
-                required
-                isMatch={newPassword === newPassword2}
-              ></Password2Input>
-              {!(newPassword2 === "") &&
-                !(newPassword === newPassword2) && ( // 비밀번호 확인 Validation 체크
-                  <InvalidMsg>비밀번호를 확인해주세요 !</InvalidMsg>
-                )}
-            </>
-          )}
 
-          {isSubmitting ? ( // 회원가입 요청 중
-            <SpinnerBox2>
-              <PacmanLoader
-                size={20}
-                color={"#F7F700"}
-                loading={isSubmitting}
-              />
-            </SpinnerBox2>
-          ) : (
-            <RegisterBtn
-              type="submit"
-              disabled={
-                !(name && email && newPassword && newPassword2 && isCodeMatch)
-              }
-            >
-              비밀번호 변경 완료
-            </RegisterBtn>
-          )}
-        </RegisterForm>
-      </Container>
-    </Wrapper>
+            {isSendEmail && ( /// 이메일 요청 완료 , 인증번호 입력창
+              <div style={{ margin: "-1rem 0 1.5rem" }}>
+                <AuthCodeInput
+                  type="text"
+                  placeholder="인증번호 6자리를 입력해주세요 !"
+                  value={authCodeValue}
+                  onChange={authCodeValueHandler}
+                  readOnly={isCodeMatch}
+                  maxLength="6"
+                ></AuthCodeInput>
+
+                {isAuthing ? (
+                  <SpinnerBox>
+                    <PacmanLoader
+                      size={16}
+                      color={"#F7F700"}
+                      loading={isAuthing}
+                    />
+                  </SpinnerBox>
+                ) : (
+                  <AuthCodeBtn
+                    onClick={compareAuthCode}
+                    type="button"
+                    valid={authCodeValue}
+                    disabled={!authCodeValue || isCodeMatch}
+                  >
+                    확인
+                  </AuthCodeBtn>
+                )}
+              </div>
+            )}
+            {isCodeMatch && (
+              <>
+                <Label htmlFor="newPassword">새 비밀번호</Label>
+                <Input
+                  id="newPassword"
+                  type="password"
+                  placeholder="어렵게 8자리 이상"
+                  value={newPassword}
+                  onChange={newPasswordHandler}
+                  required
+                ></Input>
+                {!(newPassword === "") &&
+                  newPassword.length < 8 && ( // 비밀번호 Validation 체크
+                    <InvalidMsg>비밀번호는 8자리 이상이어야 해요 !</InvalidMsg>
+                  )}
+                <Label htmlFor="newPassword2">새 비밀번호 확인</Label>
+                <Password2Input
+                  id="newPassword2"
+                  type="password"
+                  placeholder="비밀번호 확인"
+                  value={newPassword2}
+                  onChange={newPassword2Handler}
+                  required
+                  isMatch={newPassword === newPassword2}
+                ></Password2Input>
+                {!(newPassword2 === "") &&
+                  !(newPassword === newPassword2) && ( // 비밀번호 확인 Validation 체크
+                    <InvalidMsg>비밀번호를 확인해주세요 !</InvalidMsg>
+                  )}
+              </>
+            )}
+
+            {isSubmitting ? ( // 회원가입 요청 중
+              <SpinnerBox2>
+                <PacmanLoader
+                  size={20}
+                  color={"#F7F700"}
+                  loading={isSubmitting}
+                />
+              </SpinnerBox2>
+            ) : (
+              <RegisterBtn
+                type="submit"
+                disabled={
+                  !(name && email && newPassword && newPassword2 && isCodeMatch)
+                }
+              >
+                비밀번호 변경 완료
+              </RegisterBtn>
+            )}
+          </RegisterForm>
+        </Container>
+      </Wrapper>
+    </>
   );
 };
 

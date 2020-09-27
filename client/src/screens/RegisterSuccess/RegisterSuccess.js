@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import MyHelmet from "components/MyHelmet";
+
 const Wrapper = styled.div`
   height: 85vh;
   width: 100vw;
@@ -53,23 +55,27 @@ const ToLoginBtn = styled(Link)`
 
 const RegisterSuccess = () => {
   return (
-    <Wrapper>
-      <Container>
-        {/* <Logo>School RanKer</Logo> */}
-        <img
-          style={{ width: "420px", marginBottom: "2rem" }}
-          src={`${process.env.PUBLIC_URL}/img/logo.png`}
-          alt="logo"
-        />
+    <>
+      <MyHelmet title="회원가입 완료 ! | School Ranker" />
 
-        <SubTitle>회원가입 완료 !</SubTitle>
-        <Text>
-          <SubLogo>스쿨랭커</SubLogo>와 함께 하게 되신 것을 환영해요 !
-        </Text>
+      <Wrapper>
+        <Container>
+          {/* <Logo>School RanKer</Logo> */}
+          <img
+            style={{ width: "420px", marginBottom: "2rem" }}
+            src={`${process.env.PUBLIC_URL}/img/logo.png`}
+            alt="logo"
+          />
 
-        <ToLoginBtn to="/loginpage">로그인하러 가기</ToLoginBtn>
-      </Container>
-    </Wrapper>
+          <SubTitle>회원가입 완료 !</SubTitle>
+          <Text>
+            <SubLogo>스쿨랭커</SubLogo>와 함께 하게 되신 것을 환영해요 !
+          </Text>
+
+          <ToLoginBtn to="/loginpage">로그인하러 가기</ToLoginBtn>
+        </Container>
+      </Wrapper>
+    </>
   );
 };
 

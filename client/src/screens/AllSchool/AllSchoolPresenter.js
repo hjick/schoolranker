@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 import SchoolLists from "components/SchoolLists";
 import SchoolPagination from "components/SchoolPagination";
+import MyHelmet from "components/MyHelmet";
 
 const Container = styled.div`
   display: flex;
@@ -76,6 +77,8 @@ const AllSchoolPresenter = ({
   const { showSidebar } = view;
   return (
     <>
+      <MyHelmet title="스쿨랭커 | School Ranker" />
+
       <Container showSidebar={showSidebar}>
         <a href="/">
           <Logo src={`${process.env.PUBLIC_URL}/img/logo.png`} />

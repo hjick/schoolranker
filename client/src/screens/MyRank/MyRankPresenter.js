@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SummonerLists from "components/SummonerLists";
 import SummonerPagination from "components/SummonerPagination";
+import MyHelmet from "components/MyHelmet";
 
 const Container = styled.div`
   display: flex;
@@ -83,6 +84,8 @@ const MyRankPresenter = ({
 }) => {
   return (
     <>
+      <MyHelmet title="내 순위 | School Ranker" />
+
       <Container>
         <a href="/myrank">
           <img

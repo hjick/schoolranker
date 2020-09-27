@@ -20,10 +20,9 @@ import {
   faMedal,
 } from "@fortawesome/free-solid-svg-icons";
 import ReactGA from "react-ga";
-ReactGA.initialize("UA-179115620-1", {
-  debug: true,
-  titleCase: false,
-});
+
+ReactGA.initialize("UA-179115620-1");
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 // FontAwesome
 library.add(

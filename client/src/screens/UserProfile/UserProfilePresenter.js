@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import PacmanLoader from "react-spinners/PacmanLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import MyHelmet from "components/MyHelmet";
 
 const Wrapper = styled.div`
   display: flex;
@@ -308,351 +309,359 @@ const UserProfile = ({
 }) => {
   if (user.userData?._id) {
     return (
-      <Wrapper showSidebar={showSidebar}>
-        <Label>내 정보</Label>
-        <Container>
-          <SummonerContainer modifyModeSummoner={modifyModeSummoner}>
-            {modifyModeSummoner ? (
-              /////// 수정 모드
-              <>
-                <FontAwesome
-                  icon="arrow-left"
-                  onClick={() => setModifyModeSummoner(false)}
-                />
-                <label>롤 소환사 명</label>
-                <form
-                  onSubmit={modifySummonerHandler}
-                  style={{ width: "100%", marginTop: "1rem" }}
-                >
-                  <SummonerInput
-                    type="text"
-                    value={newSummonerInput}
-                    onChange={newSummonerHandler}
-                    required
-                    readOnly={authSummoner}
-                    placeholder="ex) 지기노무상"
-                  ></SummonerInput>
-                  {isSearchingSummoner ? (
-                    <LoaderBoxSearch>
-                      <PacmanLoader
-                        size={17}
-                        color={"#F7F700"}
-                        loading={isSearchingSummoner}
-                      />
-                    </LoaderBoxSearch>
-                  ) : (
-                    <>
-                      <ModifySummonerBtn
-                        onClick={searchSummoner}
-                        type="button"
-                        disabled={authSummoner}
-                      >
-                        검색
-                      </ModifySummonerBtn>
-                    </>
-                  )}
-                  {isModifyingSummoner ? (
-                    <LoaderBoxModify>
-                      <PacmanLoader
-                        size={30}
-                        color={"#F7F700"}
-                        loading={isModifyingSummoner}
-                      />
-                    </LoaderBoxModify>
-                  ) : (
-                    <ModifyBtn
-                      type="submit"
-                      // onClick={modifySummonerHandler}
-                      style={{ margin: "8.5rem auto 1rem" }}
-                    >
-                      {summonerName ? "수정완료" : "등록완료"}
-                    </ModifyBtn>
-                  )}
-                </form>
-              </>
-            ) : (
-              ///// 수정 모드 끝
+      <>
+        <MyHelmet title="내 정보 | School Ranker" />
 
-              //// 일반모드
-
-              <>
-                {summonerName && summonerIcon ? (
-                  <>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginBottom: "2rem",
-                        marginTop: "2.5rem",
-                      }}
-                    >
-                      <Icon src={summonerIcon}></Icon>
-
-                      <Name>{summonerName}</Name>
-                    </div>
-                    {tier ? ( ///////// 렙 30 이상
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Emblem
-                          src={`${process.env.PUBLIC_URL}/img/ranked-emblems/${tier}.png`}
+        <Wrapper showSidebar={showSidebar}>
+          <Label>내 정보</Label>
+          <Container>
+            <SummonerContainer modifyModeSummoner={modifyModeSummoner}>
+              {modifyModeSummoner ? (
+                /////// 수정 모드
+                <>
+                  <FontAwesome
+                    icon="arrow-left"
+                    onClick={() => setModifyModeSummoner(false)}
+                  />
+                  <label>롤 소환사 명</label>
+                  <form
+                    onSubmit={modifySummonerHandler}
+                    style={{ width: "100%", marginTop: "1rem" }}
+                  >
+                    <SummonerInput
+                      type="text"
+                      value={newSummonerInput}
+                      onChange={newSummonerHandler}
+                      required
+                      readOnly={authSummoner}
+                      placeholder="ex) 지기노무상"
+                    ></SummonerInput>
+                    {isSearchingSummoner ? (
+                      <LoaderBoxSearch>
+                        <PacmanLoader
+                          size={17}
+                          color={"#F7F700"}
+                          loading={isSearchingSummoner}
                         />
-                        <List>
-                          <Solo>솔로랭크</Solo>
-                          <li>{`Lv. ${summonerLevel}`}</li>
-
-                          <Tier>
-                            {tier} {rank === "I" && "1"}
-                            {rank === "II" && "2"}
-                            {rank === "III" && "3"}
-                            {rank === "IV" && "4"}
-                            {rank === "V" && "5"}
-                          </Tier>
-                          <LP>{leaguePoints} LP</LP>
-                          <div>
-                            <Update
-                              onClick={updateHandler}
-                              isUpdatingSummoner={isUpdatingSummoner}
-                            >
-                              Update
-                            </Update>
-                          </div>
-                        </List>
-                      </div>
+                      </LoaderBoxSearch>
                     ) : (
-                      //////////// 언랭
+                      <>
+                        <ModifySummonerBtn
+                          onClick={searchSummoner}
+                          type="button"
+                          disabled={authSummoner}
+                        >
+                          검색
+                        </ModifySummonerBtn>
+                      </>
+                    )}
+                    {isModifyingSummoner ? (
+                      <LoaderBoxModify>
+                        <PacmanLoader
+                          size={30}
+                          color={"#F7F700"}
+                          loading={isModifyingSummoner}
+                        />
+                      </LoaderBoxModify>
+                    ) : (
+                      <ModifyBtn
+                        type="submit"
+                        // onClick={modifySummonerHandler}
+                        style={{ margin: "8.5rem auto 1rem" }}
+                      >
+                        {summonerName ? "수정완료" : "등록완료"}
+                      </ModifyBtn>
+                    )}
+                  </form>
+                </>
+              ) : (
+                ///// 수정 모드 끝
+
+                //// 일반모드
+
+                <>
+                  {summonerName && summonerIcon ? (
+                    <>
                       <div
                         style={{
                           display: "flex",
                           alignItems: "center",
-                          margin: "4.3rem 0",
+                          marginBottom: "2rem",
+                          marginTop: "2.5rem",
                         }}
                       >
-                        언랭이에요 ...
-                      </div>
-                    )}
+                        <Icon src={summonerIcon}></Icon>
 
-                    <ModifyBtn
-                      type="button"
-                      onClick={() => setModifyModeSummoner(true)}
-                    >
-                      소환사 수정하기
-                    </ModifyBtn>
-                  </>
-                ) : (
-                  <>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "flex-end",
-                        alignItems: "center",
-                        height: "100%",
-                      }}
-                    >
-                      <Icon src={summonerIcon}></Icon>
-                      <div style={{ margin: "2rem auto 5rem" }}>
-                        소환사를 등록해주세요 !
+                        <Name>{summonerName}</Name>
                       </div>
+                      {tier ? ( ///////// 렙 30 이상
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Emblem
+                            src={`${process.env.PUBLIC_URL}/img/ranked-emblems/${tier}.png`}
+                          />
+                          <List>
+                            <Solo>솔로랭크</Solo>
+                            <li>{`Lv. ${summonerLevel}`}</li>
+
+                            <Tier>
+                              {tier} {rank === "I" && "1"}
+                              {rank === "II" && "2"}
+                              {rank === "III" && "3"}
+                              {rank === "IV" && "4"}
+                              {rank === "V" && "5"}
+                            </Tier>
+                            <LP>{leaguePoints} LP</LP>
+                            <div>
+                              <Update
+                                onClick={updateHandler}
+                                isUpdatingSummoner={isUpdatingSummoner}
+                              >
+                                Update
+                              </Update>
+                            </div>
+                          </List>
+                        </div>
+                      ) : (
+                        //////////// 언랭
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            margin: "4.3rem 0",
+                          }}
+                        >
+                          언랭이에요 ...
+                        </div>
+                      )}
+
                       <ModifyBtn
-                        onClick={() => setModifyModeSummoner(true)}
                         type="button"
-                        style={{ marginBottom: "2rem" }}
+                        onClick={() => setModifyModeSummoner(true)}
                       >
-                        소환사 등록하기
+                        소환사 수정하기
                       </ModifyBtn>
-                    </div>
-                  </>
-                )}
-              </>
-            )}
-          </SummonerContainer>
-
-          <SchoolContainer modifyModeSchool={modifyModeSchool}>
-            {modifyModeSchool ? ( /// 학교 수정 모드
-              <>
-                <FontAwesome
-                  style={{ marginBottom: "2rem" }}
-                  icon="arrow-left"
-                  onClick={toModifyModeSchool}
-                />
-                <label>우리 학교</label>
-
-                <div style={{ width: "100%", marginTop: "1rem" }}>
-                  <SchoolInput
-                    type="text"
-                    value={newSchoolInput}
-                    onChange={newSchoolHandler}
-                    required
-                    placeholder="ex) 동작고등학교"
-                    readOnly={authSchool}
-                  ></SchoolInput>
-                  {isSearchingSchool ? (
-                    <LoaderBoxSearch>
-                      <PacmanLoader
-                        size={17}
-                        color={"#F7F700"}
-                        loading={isSearchingSchool}
-                      />
-                    </LoaderBoxSearch>
+                    </>
                   ) : (
                     <>
-                      <ModifySummonerBtn
-                        onClick={searchSchool}
-                        type="button"
-                        disabled={authSchool}
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "flex-end",
+                          alignItems: "center",
+                          height: "100%",
+                        }}
                       >
-                        검색
-                      </ModifySummonerBtn>
+                        <Icon src={summonerIcon}></Icon>
+                        <div style={{ margin: "2rem auto 5rem" }}>
+                          소환사를 등록해주세요 !
+                        </div>
+                        <ModifyBtn
+                          onClick={() => setModifyModeSummoner(true)}
+                          type="button"
+                          style={{ marginBottom: "2rem" }}
+                        >
+                          소환사 등록하기
+                        </ModifyBtn>
+                      </div>
                     </>
                   )}
-                  {schoolLists &&
-                    schoolLists.length > 0 && ( // 학교 검색 완료 했을 때
-                      <ListContainer>
-                        <ul style={{ marginTop: "1rem" }}>
-                          {schoolLists.map((schoolList) => (
-                            <Item
-                              key={schoolList.id}
-                              onClick={regionHandler}
-                              name={schoolList.region}
-                            >
-                              {schoolList.schoolName}, {schoolList.address}
-                            </Item>
-                          ))}
-                        </ul>
-                      </ListContainer>
+                </>
+              )}
+            </SummonerContainer>
+
+            <SchoolContainer modifyModeSchool={modifyModeSchool}>
+              {modifyModeSchool ? ( /// 학교 수정 모드
+                <>
+                  <FontAwesome
+                    style={{ marginBottom: "2rem" }}
+                    icon="arrow-left"
+                    onClick={toModifyModeSchool}
+                  />
+                  <label>우리 학교</label>
+
+                  <div style={{ width: "100%", marginTop: "1rem" }}>
+                    <SchoolInput
+                      type="text"
+                      value={newSchoolInput}
+                      onChange={newSchoolHandler}
+                      required
+                      placeholder="ex) 동작고등학교"
+                      readOnly={authSchool}
+                    ></SchoolInput>
+                    {isSearchingSchool ? (
+                      <LoaderBoxSearch>
+                        <PacmanLoader
+                          size={17}
+                          color={"#F7F700"}
+                          loading={isSearchingSchool}
+                        />
+                      </LoaderBoxSearch>
+                    ) : (
+                      <>
+                        <ModifySummonerBtn
+                          onClick={searchSchool}
+                          type="button"
+                          disabled={authSchool}
+                        >
+                          검색
+                        </ModifySummonerBtn>
+                      </>
                     )}
-                  {isModifyingSchool ? (
-                    <LoaderBoxModify>
-                      <PacmanLoader
-                        size={30}
-                        color={"#F7F700"}
-                        loading={isModifyingSchool}
+                    {schoolLists &&
+                      schoolLists.length > 0 && ( // 학교 검색 완료 했을 때
+                        <ListContainer>
+                          <ul style={{ marginTop: "1rem" }}>
+                            {schoolLists.map((schoolList) => (
+                              <Item
+                                key={schoolList.id}
+                                onClick={regionHandler}
+                                name={schoolList.region}
+                              >
+                                {schoolList.schoolName}, {schoolList.address}
+                              </Item>
+                            ))}
+                          </ul>
+                        </ListContainer>
+                      )}
+                    {isModifyingSchool ? (
+                      <LoaderBoxModify>
+                        <PacmanLoader
+                          size={30}
+                          color={"#F7F700"}
+                          loading={isModifyingSchool}
+                        />
+                      </LoaderBoxModify>
+                    ) : (
+                      <ModifyBtn
+                        type="button"
+                        onClick={modifySchoolHandler}
+                        style={{ margin: "4rem auto 1rem" }}
+                      >
+                        {school ? "수정완료" : "등록완료"}
+                      </ModifyBtn>
+                    )}
+                  </div>
+                </>
+              ) : (
+                /// 학교 일반 모드
+                <>
+                  {school ? (
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          marginBottom: "2rem",
+                          marginTop: "2.5rem",
+                        }}
+                      >
+                        <MySchool>{school}</MySchool>
+                      </div>
+
+                      <FontAwesomeIcon
+                        icon="school"
+                        size="7x"
+                        style={{ color: "#fbd46d", marginBottom: "1.5rem" }}
                       />
-                    </LoaderBoxModify>
+                      <ListSchool>
+                        <SchoolRank>
+                          <span>우리학교 랭킹 : </span>
+                          {Object.keys(mySchoolRanking).length > 0 && (
+                            <>
+                              {mySchoolRanking.rank === 1 && (
+                                <>
+                                  <GoldMedal icon="medal" />
+                                </>
+                              )}
+                              {mySchoolRanking.rank === 2 && (
+                                <>
+                                  <SilverMedal icon="medal" />
+                                </>
+                              )}
+                              {mySchoolRanking.rank === 3 && (
+                                <>
+                                  <BronzeMedal icon="medal" />
+                                </>
+                              )}
+                              <span style={{ fontSize: "1.2rem" }}>
+                                {mySchoolRanking.rank}
+                              </span>
+                              &nbsp;등
+                            </>
+                          )}
+                        </SchoolRank>
+                        <SchoolRank>
+                          <span>학교에서 내 랭킹 : </span>
+
+                          {myRankingInSchool && (
+                            <>
+                              {myRankingInSchool === 1 && (
+                                <>
+                                  <GoldMedal icon="medal" />
+                                </>
+                              )}
+                              {myRankingInSchool === 2 && (
+                                <>
+                                  <SilverMedal icon="medal" />
+                                </>
+                              )}
+                              {myRankingInSchool === 3 && (
+                                <>
+                                  <BronzeMedal icon="medal" />
+                                </>
+                              )}
+                              <span style={{ fontSize: "1.2rem" }}>
+                                {myRankingInSchool}
+                              </span>
+                              &nbsp;등
+                            </>
+                          )}
+                        </SchoolRank>
+                      </ListSchool>
+                      <ModifyBtn onClick={toModifyModeSchool} type="button">
+                        학교 수정하기
+                      </ModifyBtn>
+                    </>
                   ) : (
-                    <ModifyBtn
-                      type="button"
-                      onClick={modifySchoolHandler}
-                      style={{ margin: "4rem auto 1rem" }}
-                    >
-                      {school ? "수정완료" : "등록완료"}
-                    </ModifyBtn>
+                    <>
+                      <FontAwesomeIcon
+                        icon="school"
+                        style={{
+                          fontSize: "48px",
+                          color: "#bdbdbd",
+                          marginTop: "6.5rem",
+                        }}
+                      />
+                      <div style={{ margin: "2rem auto 5rem" }}>
+                        학교를 등록해주세요 !
+                      </div>
+                      <ModifyBtn onClick={toModifyModeSchool} type="button">
+                        학교 등록하기
+                      </ModifyBtn>
+                    </>
                   )}
-                </div>
-              </>
-            ) : (
-              /// 학교 일반 모드
-              <>
-                {school ? (
-                  <>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginBottom: "2rem",
-                        marginTop: "2.5rem",
-                      }}
-                    >
-                      <MySchool>{school}</MySchool>
-                    </div>
-
-                    <FontAwesomeIcon
-                      icon="school"
-                      size="7x"
-                      style={{ color: "#fbd46d", marginBottom: "1.5rem" }}
-                    />
-                    <ListSchool>
-                      <SchoolRank>
-                        <span>우리학교 랭킹 : </span>
-                        {Object.keys(mySchoolRanking).length > 0 && (
-                          <>
-                            {mySchoolRanking.rank === 1 && (
-                              <>
-                                <GoldMedal icon="medal" />
-                              </>
-                            )}
-                            {mySchoolRanking.rank === 2 && (
-                              <>
-                                <SilverMedal icon="medal" />
-                              </>
-                            )}
-                            {mySchoolRanking.rank === 3 && (
-                              <>
-                                <BronzeMedal icon="medal" />
-                              </>
-                            )}
-                            <span style={{ fontSize: "1.2rem" }}>
-                              {mySchoolRanking.rank}
-                            </span>
-                            &nbsp;등
-                          </>
-                        )}
-                      </SchoolRank>
-                      <SchoolRank>
-                        <span>학교에서 내 랭킹 : </span>
-
-                        {myRankingInSchool && (
-                          <>
-                            {myRankingInSchool === 1 && (
-                              <>
-                                <GoldMedal icon="medal" />
-                              </>
-                            )}
-                            {myRankingInSchool === 2 && (
-                              <>
-                                <SilverMedal icon="medal" />
-                              </>
-                            )}
-                            {myRankingInSchool === 3 && (
-                              <>
-                                <BronzeMedal icon="medal" />
-                              </>
-                            )}
-                            <span style={{ fontSize: "1.2rem" }}>
-                              {myRankingInSchool}
-                            </span>
-                            &nbsp;등
-                          </>
-                        )}
-                      </SchoolRank>
-                    </ListSchool>
-                    <ModifyBtn onClick={toModifyModeSchool} type="button">
-                      학교 수정하기
-                    </ModifyBtn>
-                  </>
-                ) : (
-                  <>
-                    <FontAwesomeIcon
-                      icon="school"
-                      style={{
-                        fontSize: "48px",
-                        color: "#bdbdbd",
-                        marginTop: "6.5rem",
-                      }}
-                    />
-                    <div style={{ margin: "2rem auto 5rem" }}>
-                      학교를 등록해주세요 !
-                    </div>
-                    <ModifyBtn onClick={toModifyModeSchool} type="button">
-                      학교 등록하기
-                    </ModifyBtn>
-                  </>
-                )}
-              </>
-            )}
-          </SchoolContainer>
-        </Container>
-      </Wrapper>
+                </>
+              )}
+            </SchoolContainer>
+          </Container>
+        </Wrapper>
+      </>
     );
   } else {
     return (
-      <SpinnerBox>
-        <PacmanLoader size={45} color={"#F7F700"} />
-      </SpinnerBox>
+      <>
+        <MyHelmet title="내 정보 | School Ranker" />
+
+        <SpinnerBox>
+          <PacmanLoader size={45} color={"#F7F700"} />
+        </SpinnerBox>
+      </>
     );
   }
 };
